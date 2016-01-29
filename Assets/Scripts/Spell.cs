@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spell : MonoBehaviour {
+public class Spell : PooledObject {
 
-    public SpellsEnum name;
-    public SpellsEnum blocking;
-    public KeySequencer sequencer;
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
 
-    void Start()
+    public override void Init()
     {
-        sequencer.SequenceValidEvent += LaunchSpell;
+        base.Init();
     }
 
-    void LaunchSpell()
+    public override void Reset()
     {
-        Debug.Log("Spell : " + name.ToString());
+        base.Reset();
     }
-
 }
