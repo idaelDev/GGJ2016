@@ -8,6 +8,8 @@ public class Spell : PooledObject {
     public float spellSpeed;
     public bool moveright = true;
 
+    public bool moving;
+
     private Vector3 movingDirection;
 
     protected void Start()
@@ -17,13 +19,18 @@ public class Spell : PooledObject {
         if(!moveright)
         {
             movingDirection *= -1;
+            transform.localScale = new Vector3(-1, 1, 1);
         }
 
     }
 
 	// Update is called once per frame
 	void Update () {
-        Move();
+
+        if (moving)
+        {
+            Move();
+        }
 	}
 
     void Move()
@@ -39,6 +46,13 @@ public class Spell : PooledObject {
     public override void Reset()
     {
         base.Reset();
+        moving = false;
+    }
+
+    public void StartMoving()
+    {
+        moving = true;
+        Debug.Log(moving);
     }
 
 }

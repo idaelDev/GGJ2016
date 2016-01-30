@@ -115,6 +115,7 @@ Transform:
   - {fileID: 1927840676}
   - {fileID: 615030994}
   - {fileID: 1552129837}
+  - {fileID: 1802459732}
   m_Father: {fileID: 643206579}
   m_RootOrder: 0
 --- !u!1001 &220953990
@@ -154,7 +155,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 458462, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11447022, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
       propertyPath: sequencer
@@ -181,6 +182,14 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 2280cb3fc7f4f3647985574cd2fec7a7,
         type: 3}
+    - target: {fileID: 9551682, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 29318a87f6bba2741beec43bd029eb1e, type: 2}
+    - target: {fileID: 442698, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
   m_IsPrefabParent: 0
@@ -192,6 +201,47 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 448686, guid: 11a0e9f9edb039b478b9691aac68e658, type: 2}
   m_PrefabInternal: {fileID: 824347328}
+--- !u!1 &325643539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 325643540}
+  - 114: {fileID: 325643541}
+  m_Layer: 0
+  m_Name: Konami
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &325643540
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 325643539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.472000033, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1148852973}
+  m_RootOrder: 3
+--- !u!114 &325643541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 325643539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0b7e78392c8574a9bf1a8df7c43d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Chaos
+  sequence: 7a0000007a0000007300000073000000610000006400000061000000640000006200000061000000
 --- !u!1 &401704902 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 181112, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
@@ -263,12 +313,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437428, guid: a593691c5f7c87f479a552e148b8a7f3, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 120650, guid: a593691c5f7c87f479a552e148b8a7f3, type: 2}
-      propertyPath: m_TagString
-      value: Ball
-      objectReference: {fileID: 0}
+    - target: {fileID: 11447132, guid: a593691c5f7c87f479a552e148b8a7f3, type: 2}
+      propertyPath: rightPlayerTransform
+      value: 
+      objectReference: {fileID: 1823647603}
+    - target: {fileID: 11447132, guid: a593691c5f7c87f479a552e148b8a7f3, type: 2}
+      propertyPath: leftplayerTransform
+      value: 
+      objectReference: {fileID: 220953991}
+    - target: {fileID: 11447132, guid: a593691c5f7c87f479a552e148b8a7f3, type: 2}
+      propertyPath: bubbleManager
+      value: 
+      objectReference: {fileID: 1689002047}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a593691c5f7c87f479a552e148b8a7f3, type: 2}
   m_IsPrefabParent: 0
@@ -299,7 +357,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1148852973}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &512883102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Dark
-  sequence: 64000000
+  sequence: 610000007700000061000000
 --- !u!1 &556370425
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,98 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Chaos
-  sequence: 73000000
---- !u!1 &589967821 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 120650, guid: a593691c5f7c87f479a552e148b8a7f3, type: 2}
-  m_PrefabInternal: {fileID: 406685913}
---- !u!114 &589967825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 589967821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0e9251d83039c48a833453e10d318e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialSpeed: 1
-  maxSpeedAugmentationMult: 1.20000005
-  rightPlayerTransform: {fileID: 1823647603}
-  leftplayerTransform: {fileID: 220953991}
-  timeToBegin: 2
-  speedFadeOutVolume: .5
-  bubbleManager: {fileID: 1689002047}
---- !u!82 &589967826
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 589967821}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0aaddf0722811c7439a8e6167cc71933, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
+  sequence: 730000007700000073000000
 --- !u!1 &612493353
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Dark
-  sequence: 13010000
+  sequence: 140100001101000014010000
 --- !u!1 &643206578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,9 +1174,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 512883101}
   - {fileID: 1695222681}
+  - {fileID: 512883101}
   - {fileID: 576743733}
+  - {fileID: 325643540}
   m_Father: {fileID: 643206579}
   m_RootOrder: 1
 --- !u!1 &1154599708
@@ -1356,7 +1324,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 463742, guid: 80fcf583a8782e74e9879d0094876b69, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.95000005
+      value: -2.05999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 405566, guid: 80fcf583a8782e74e9879d0094876b69, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.13000011
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 80fcf583a8782e74e9879d0094876b69, type: 2}
@@ -1435,7 +1407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Chaos
-  sequence: 12010000
+  sequence: 120100001101000012010000
 --- !u!1 &1642619795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,6 +1627,32 @@ MonoBehaviour:
   startHealth: 100
   startMana: 100
   sequences: {fileID: 1148852972}
+--- !u!212 &1657872129
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1657872125}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1689002045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,7 +1858,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1148852973}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &1695222682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1873,7 +1871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Light
-  sequence: 7a000000
+  sequence: 640000007700000064000000
 --- !u!1 &1717866037
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,6 +2036,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!1 &1802459731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1802459732}
+  - 114: {fileID: 1802459733}
+  m_Layer: 0
+  m_Name: Konami
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1802459732
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1802459731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.472000033, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 38119779}
+  m_RootOrder: 3
+--- !u!114 &1802459733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1802459731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0b7e78392c8574a9bf1a8df7c43d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Chaos
+  sequence: 11010000110100001201000012010000140100001301000014010000130100006200000061000000
 --- !u!1 &1820938185
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,8 +2204,16 @@ Prefab:
     - target: {fileID: 21220978, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2280cb3fc7f4f3647985574cd2fec7a7,
+      objectReference: {fileID: 21300000, guid: aff6959d7a41a5a4e89fad2297050fff,
         type: 3}
+    - target: {fileID: 9551682, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 35d504754f00ee84a8104b93fd69cd7c, type: 2}
+    - target: {fileID: 442698, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a49c7f5a0ea881f478e9fd488db77355, type: 2}
   m_IsPrefabParent: 0
@@ -2221,7 +2268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Light
-  sequence: 11010000
+  sequence: 130100001101000013010000
 --- !u!4 &1927840676
 Transform:
   m_ObjectHideFlags: 0

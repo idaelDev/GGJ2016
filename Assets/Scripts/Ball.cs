@@ -41,6 +41,7 @@ public class Ball : MonoBehaviour {
 				move *= -1;
 			}
 			transform.position = transform.position + move;
+            transform.Rotate(new Vector3(0,0,100) * speed * Time.deltaTime * ((goRight) ? -1 : 1));
 		} else {
 			timer += Time.deltaTime;
 			if(timer >= timeToBegin){
