@@ -45,7 +45,7 @@ public class Ball : MonoBehaviour {
 			timer += Time.deltaTime;
 			if(timer >= timeToBegin){
 				if(!endOnce){
-					transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+					transform.position = new Vector3(transform.position.x, -2, transform.position.z);
 					endOnce = true;
 				}
 				else{
@@ -56,7 +56,7 @@ public class Ball : MonoBehaviour {
 				}
 			}
 			else{
-				transform.position = new Vector3(transform.position.x, Mathf.Lerp(beginY, 0, timer/timeToBegin), transform.position.z);
+				transform.position = new Vector3(transform.position.x, Mathf.Lerp(beginY, -2, timer/timeToBegin), transform.position.z);
 			}
 		}
     }
