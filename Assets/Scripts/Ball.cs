@@ -64,6 +64,12 @@ public class Ball : MonoBehaviour {
         }
     }
 
+    void SetType()
+    {
+        int rand = Random.Range(0, 3);
+        element = (ElementsNames)rand;
+    }
+
     void ManageBallMovement()
     {
         Vector3 refPosition;
@@ -71,9 +77,13 @@ public class Ball : MonoBehaviour {
         {
             case PlayerPosition.RIGHT:
                 refPosition = rightPlayerTransform.position;
+                goRight = false;
+                currentPlayerTarget = PlayerPosition.LEFT;
                 break;
             case PlayerPosition.LEFT:
                 refPosition = leftplayerTransform.position;
+                currentPlayerTarget = PlayerPosition.RIGHT;
+                goRight = true;
                 break;
             default:
                 refPosition = rightPlayerTransform.position;
@@ -92,11 +102,18 @@ public class Ball : MonoBehaviour {
             Spell sp = other.gameObject.GetComponent<Spell>();
             if(sp.moveright != GoRight)
             {
-                //if(IsReverseType(sp.type))
-                //{
-                    ManageBallMovement();   
-                //}
+                if(IsReverseType(sp.type))
+                {
+                    ManageBallMovement();
+                    SetType();
+                    other.gameObject.GetComponent<PooledObject>().OriginPool.HideObject(other.gameObject.GetComponent<PooledObject>());
+                }
             }
+        }
+        if(other.gameObject.tag == "Player")
+        {
+            Debug.Log("Player " + currentPlayerTarget.ToString() + " Win !");
+            Destroy(gameObject);
         }
     }
    
