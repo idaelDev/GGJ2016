@@ -15,20 +15,50 @@ public class Ball : MonoBehaviour {
     private float distanceBetweenPlayers;
     private Vector3 moveDirection = Vector3.right;
 
+	// begin stuff
+	private bool beginBool = true;
+	public float timeToBegin;
+	private float beginY;
+	private float timer;
+	private bool endOnce = false;
+	public float speedFadeOutVolume;
+	private AudioSource beginAudioClip;
+	public  BubbleManagerScript bubbleManager;
+
     void Start()
     {
         speed = initialSpeed;
         distanceBetweenPlayers = Vector3.Distance(rightPlayerTransform.position, leftplayerTransform.position);
+		beginY = transform.position.y;
+		beginAudioClip = GetComponent<AudioSource> ();
     }
 
     void Update()
     {
-        Vector3 move = moveDirection * speed * Time.deltaTime;
-        if(!goRight)
-        {
-            move *= -1;
-        }
-        transform.position = transform.position + move;
+		if (!beginBool) {
+			Vector3 move = moveDirection * speed * Time.deltaTime;
+			if (!goRight) {
+				move *= -1;
+			}
+			transform.position = transform.position + move;
+		} else {
+			timer += Time.deltaTime;
+			if(timer >= timeToBegin){
+				if(!endOnce){
+					transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+					endOnce = true;
+				}
+				else{
+					beginAudioClip.volume -= Time.deltaTime * speedFadeOutVolume;
+					if(beginAudioClip.volume == 0){ 
+						beginBool = false;
+					}
+				}
+			}
+			else{
+				transform.position = new Vector3(transform.position.x, Mathf.Lerp(beginY, 0, timer/timeToBegin), transform.position.z);
+			}
+		}
     }
 
     public bool GoRight
@@ -113,8 +143,14 @@ public class Ball : MonoBehaviour {
         if(other.gameObject.tag == "Player")
         {
             Debug.Log("Player " + currentPlayerTarget.ToString() + " Win !");
+			if(currentPlayerTarget == PlayerPosition.LEFT){
+				bubbleManager.setWinPlayer(1);
+			}
+			else{
+				bubbleManager.setWinPlayer(2);
+			}
+			/// do stuff
             Destroy(gameObject);
         }
     }
-   
 }
