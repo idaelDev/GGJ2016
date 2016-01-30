@@ -3,8 +3,16 @@ using System.Collections;
 
 public abstract class PooledObject : MonoBehaviour {
 
+    private ObjectPool originPool;
+
+    public ObjectPool OriginPool
+    {
+        get { return originPool; }
+        set { originPool = value; }
+    }
+
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 	
 	}
 	
@@ -22,4 +30,5 @@ public abstract class PooledObject : MonoBehaviour {
     {
         gameObject.SetActive(false);
     }
+
 }

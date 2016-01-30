@@ -27,6 +27,7 @@ public class ObjectPool : MonoBehaviour {
     {
         PooledObject obj = Instantiate(objectToPool, transform.position, transform.rotation) as PooledObject;
         obj.gameObject.SetActive(false);
+        obj.OriginPool = this;
         pool.Add(obj);
         return obj;
     }

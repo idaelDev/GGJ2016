@@ -10,11 +10,14 @@ public class Character : MonoBehaviour {
     private float health;
     private float mana;
 
+    public GameObject sequences;
+
 	// Use this for initialization
     void Start()
     {
         health = startHealth;
         mana = startMana;
+        KeySequencer[] sequencesTab = sequences.GetComponentsInChildren<KeySequencer>();
     }	
 	
 }
