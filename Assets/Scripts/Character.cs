@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Character : MonoBehaviour {
 
-    public int playerId = 0;
+    public int PlayerPosition;
     public float startHealth = 100.0f;
     public float startMana = 100.0f;
 
@@ -20,4 +20,10 @@ public class Character : MonoBehaviour {
         KeySequencer[] sequencesTab = sequences.GetComponentsInChildren<KeySequencer>();
     }	
 	
+}
+
+public enum PlayerPosition
+{
+    RIGHT,
+    LEFT
 }

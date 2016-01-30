@@ -41,11 +41,4 @@ public class Spell : PooledObject {
         base.Reset();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.tag == "Ball")
-        {
-            Debug.Log("Hit Ball");
-        }
-    }
 }

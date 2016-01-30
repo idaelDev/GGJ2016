@@ -5,6 +5,7 @@ using System.Collections;
 public class SpellPool : ObjectPool {
 
     public KeySequencer sequencer;
+    public bool moveRight;
 
     protected void Start()
     {
@@ -14,7 +15,8 @@ public class SpellPool : ObjectPool {
 
     void LaunchSpell()
     {
-        GetObject();
+        Spell s = GetObject() as Spell;
+        s.moveright = moveRight;
     }
 
 }
