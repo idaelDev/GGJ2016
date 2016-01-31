@@ -6,6 +6,9 @@ public class ButtonPlayScript : MonoBehaviour {
 	public int m_levelNumber;
 	public AudioSource m_audio;
 	bool clicked = false;
+	public UnityEngine.UI.Button button;
+	public UnityEngine.UI.Button creditsButton;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -21,6 +24,8 @@ public class ButtonPlayScript : MonoBehaviour {
 
 	public void OnClick(){
 		m_audio.Play ();
+		button.interactable = false;
+		creditsButton.interactable = false;
 		clicked = true;
 
 	}
