@@ -58,6 +58,7 @@ public class Ball : MonoBehaviour {
 			if(timer >= timeToBegin){
 				if(!endOnce){
 					transform.position = new Vector3(transform.position.x, -2, transform.position.z);
+                    SetType();
 					endOnce = true;
 				}
 				else{

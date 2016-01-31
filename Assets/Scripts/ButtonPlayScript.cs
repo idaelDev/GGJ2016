@@ -15,7 +15,7 @@ public class ButtonPlayScript : MonoBehaviour {
 	void Update () {
 		if (clicked && !m_audio.isPlaying) 
 		{
-			Application.LoadLevel (m_levelNumber);
+			Application.LoadLevel ("Main");
 		}
 	}
 

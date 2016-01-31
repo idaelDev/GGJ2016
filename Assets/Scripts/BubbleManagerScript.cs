@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BubbleManagerScript : MonoBehaviour {
 
@@ -11,22 +12,20 @@ public class BubbleManagerScript : MonoBehaviour {
 
 	public GameObject PrefabMusic;
 	public float speedFade;
-
+    
+  
+    public Sprite MonkeyImage;
+    public Sprite CraneImage;
+    public Image winnerImage;
 
 	//Win Message
 	private int winPlayer = 0;
-	public GameObject messageWinP1;
-	public UnityEngine.UI.Text textMessageP1;
 	public string messageP1;
 	public AudioClip AudioWinP1;
-	public GameObject messageWinP2;
-	public UnityEngine.UI.Text textMessageP2;
 	public string messageP2;
 	public AudioClip AudioWinP2;
 	public float TimeMessage;
 	private bool Once = false;
-
-
 
 	// Use this for initialization
 	void Start () {
@@ -63,31 +62,29 @@ public class BubbleManagerScript : MonoBehaviour {
 	}
 
 	IEnumerator WinMessage1(){
+        winnerImage.sprite = CraneImage;
 		Debug.Log ("messagewin1");
 		StartCoroutine ("FadeOut",Camera.main.GetComponent<AudioSource> ());
-		textMessageP1.text = messageP1;
-		messageWinP1.SetActive (true);
 		SourceAudio.clip = AudioWinP1;
 		SourceAudio.Play ();
-		yield return new WaitForSeconds(TimeMessage);
-		messageWinP1.SetActive (false);
+		//yield return new WaitForSeconds(TimeMessage);
 		textMessageEnd.text = textMessageHUDP1Win;
 		GameObject.Instantiate (PrefabMusic);
 		endHUD.SetActive (true);
+        yield return 0;
 	}
 
 	IEnumerator WinMessage2(){
+        winnerImage.sprite = MonkeyImage;
 		Debug.Log ("messagewin2");
 		StartCoroutine ("FadeOut",Camera.main.GetComponent<AudioSource> ());
-		textMessageP2.text = messageP2;
-		messageWinP2.SetActive (true);
 		SourceAudio.clip = AudioWinP2;
 		SourceAudio.Play();
-		yield return new WaitForSeconds(TimeMessage);
-		messageWinP2.SetActive (false);
+		//yield return new WaitForSeconds(TimeMessage);
 		textMessageEnd.text = textMessageHUDP2Win;
 		GameObject.Instantiate (PrefabMusic);
 		endHUD.SetActive (true);
+        yield return 0;
 	}
 
 	IEnumerator FadeOut(AudioSource audio){
