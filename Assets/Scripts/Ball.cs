@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour {
     private PlayerPosition currentPlayerTarget = PlayerPosition.RIGHT;
     private float distanceBetweenPlayers;
     private Vector3 moveDirection = Vector3.right;
+    private Animator anim;
 
 	// begin stuff
 	private bool beginBool = true;
@@ -25,12 +26,15 @@ public class Ball : MonoBehaviour {
 	private AudioSource beginAudioClip;
 	public  BubbleManagerScript bubbleManager;
 
+    bool isKonamiMode = false;
+
 	//sound
 
 	public AudioSource audio;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         speed = initialSpeed;
         distanceBetweenPlayers = Vector3.Distance(rightPlayerTransform.position, leftplayerTransform.position);
 		beginY = transform.position.y;
@@ -45,7 +49,10 @@ public class Ball : MonoBehaviour {
 				move *= -1;
 			}
 			transform.position = transform.position + move;
-            transform.Rotate(new Vector3(0,0,100) * speed * Time.deltaTime * ((goRight) ? -1 : 1));
+            if (isKonamiMode)
+            {
+                transform.Rotate(new Vector3(0, 0, 100) * speed * Time.deltaTime * ((goRight) ? -1 : 1));
+            }
 		} else {
 			timer += Time.deltaTime;
 			if(timer >= timeToBegin){
@@ -74,35 +81,38 @@ public class Ball : MonoBehaviour {
 
     bool IsReverseType(ElementsNames type)
     {
-        switch (element)
-        {
-            case ElementsNames.LIGHT:
-                if(type == ElementsNames.CHAOS)
-                {
-                    return true;
-                }
-                return false;
-            case ElementsNames.DARK:
-                if(type == ElementsNames.LIGHT)
-                {
-                    return true;
-                }
-                return false;
-            case ElementsNames.CHAOS:
-                if(type == ElementsNames.DARK)
-                {
-                    return true;
-                }
-                return false;
-            default:
-                return false;
-        }
+        //switch (element)
+        //{
+        //    case ElementsNames.LIGHT:
+        //        if(type == ElementsNames.CHAOS)
+        //        {
+        //            return true;
+        //        }
+        //        return false;
+        //    case ElementsNames.DARK:
+        //        if(type == ElementsNames.LIGHT)
+        //        {
+        //            return true;
+        //        }
+        //        return false;
+        //    case ElementsNames.CHAOS:
+        //        if(type == ElementsNames.DARK)
+        //        {
+        //            return true;
+        //        }
+        //        return false;
+        //    default:
+        //        return false;
+        //}
+        return type == element;
     }
 
     void SetType()
     {
         int rand = Random.Range(0, 3);
         element = (ElementsNames)rand;
+        Debug.Log(element.ToString());
+        anim.SetTrigger(element.ToString());
     }
 
     void ManageBallMovement()
