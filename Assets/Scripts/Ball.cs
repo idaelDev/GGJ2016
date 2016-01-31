@@ -137,9 +137,10 @@ public class Ball : MonoBehaviour {
                 {
                     ManageBallMovement();
                     SetType();
-                    other.gameObject.GetComponent<PooledObject>().OriginPool.HideObject(other.gameObject.GetComponent<PooledObject>());
                 }
             }
+            Debug.Log("Hit !");
+            sp.AnimateHit();
         }
         if(other.gameObject.tag == "Player")
         {

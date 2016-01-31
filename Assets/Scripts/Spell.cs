@@ -11,10 +11,12 @@ public class Spell : PooledObject {
     public bool moving;
 
     private Vector3 movingDirection;
+    private Animator anim;
 
     protected void Start()
     {
         base.Start();
+        anim = GetComponent<Animator>();
         movingDirection = Vector3.right;
         if(!moveright)
         {
@@ -55,4 +57,14 @@ public class Spell : PooledObject {
         Debug.Log(moving);
     }
 
+    public void Destruction()
+    {
+        OriginPool.HideObject(this);
+    }
+    
+    public void AnimateHit()
+    {
+        moving = false;
+        anim.SetTrigger("Hit");
+    }
 }
