@@ -25,6 +25,10 @@ public class Ball : MonoBehaviour {
 	private AudioSource beginAudioClip;
 	public  BubbleManagerScript bubbleManager;
 
+	//sound
+
+	public AudioSource audio;
+
     void Start()
     {
         speed = initialSpeed;
@@ -135,6 +139,7 @@ public class Ball : MonoBehaviour {
             {
                 if(IsReverseType(sp.type))
                 {
+					audio.Play();
                     ManageBallMovement();
                     SetType();
                     other.gameObject.GetComponent<PooledObject>().OriginPool.HideObject(other.gameObject.GetComponent<PooledObject>());

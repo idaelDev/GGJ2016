@@ -19,7 +19,7 @@ public class GeneralExplanationSceneScript : MonoBehaviour {
 
 	IEnumerator WaitAndGo(){
 		yield return new WaitForSeconds(m_secondsToWait);
-		GameObject obj = GameObject.Find ("MusicMenu");
+		GameObject obj = GameObject.Find ("MusicMenu(Clone)");
 		AudioSource audio = obj.GetComponent<AudioSource> ();
 		float i = audio.volume;
 		while (i > 0) {
