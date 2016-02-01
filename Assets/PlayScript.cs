@@ -10,8 +10,6 @@ public class PlayScript : MonoBehaviour {
 	public float m_step;
 	public int m_levelNumber;
 
-    
-
 	// Use this for initialization
 	void Start () {
 		audio = GetComponent<AudioSource> ();
