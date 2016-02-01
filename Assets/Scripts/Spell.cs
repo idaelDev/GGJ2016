@@ -42,6 +42,7 @@ public class Spell : PooledObject {
 
     public override void Init()
     {
+        GetComponent<Collider2D>().enabled = true;
         base.Init();
     }
 
@@ -57,13 +58,14 @@ public class Spell : PooledObject {
         Debug.Log(moving);
     }
 
-    public void Destruction()
+    public void Destruction() 
     {
         OriginPool.HideObject(this);
     }
     
     public void AnimateHit()
     {
+        GetComponent<Collider2D>().enabled = false;
         moving = false;
         anim.SetTrigger("Hit");
     }

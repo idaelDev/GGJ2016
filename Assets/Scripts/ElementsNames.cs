@@ -1,7 +1,7 @@
 ﻿
 public enum ElementsNames
 {
-    LIGHT,
-    DARK,
-    CHAOS
+    LIGHT = 0,
+    DARK = 1,
+    CHAOS = 2
 }

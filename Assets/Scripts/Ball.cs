@@ -53,6 +53,21 @@ public class Ball : MonoBehaviour {
             {
                 transform.Rotate(new Vector3(0, 0, 100) * speed * Time.deltaTime * ((goRight) ? -1 : 1));
             }
+            switch (element)
+            {
+                case ElementsNames.LIGHT:
+                    anim.SetInteger("Num", 0);
+                    break;
+                case ElementsNames.DARK:
+                    anim.SetInteger("Num", 1);
+                    break;
+                case ElementsNames.CHAOS:
+                    anim.SetInteger("Num", 2);
+                    break;
+                default:
+                    break;
+            }
+            Debug.Log(element.ToString());
 		} else {
 			timer += Time.deltaTime;
 			if(timer >= timeToBegin){
@@ -105,15 +120,28 @@ public class Ball : MonoBehaviour {
         //    default:
         //        return false;
         //}
-        return type == element;
+        return (int)type == (int)element;
     }
 
     void SetType()
     {
         int rand = Random.Range(0, 3);
         element = (ElementsNames)rand;
+        switch (element)
+        {
+            case ElementsNames.LIGHT:
+                anim.SetInteger("Num", 0);
+                break;
+            case ElementsNames.DARK:
+                anim.SetInteger("Num", 1);
+                break;
+            case ElementsNames.CHAOS:
+                anim.SetInteger("Num", 2);
+                break;
+            default:
+                break;
+        }
         Debug.Log(element.ToString());
-        anim.SetTrigger(element.ToString());
     }
 
     void ManageBallMovement()
@@ -128,8 +156,8 @@ public class Ball : MonoBehaviour {
                 break;
             case PlayerPosition.LEFT:
                 refPosition = leftplayerTransform.position;
-                currentPlayerTarget = PlayerPosition.RIGHT;
                 goRight = true;
+                currentPlayerTarget = PlayerPosition.RIGHT;
                 break;
             default:
                 refPosition = rightPlayerTransform.position;
@@ -143,19 +171,22 @@ public class Ball : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+                    Debug.Log("Hit !");
         if(other.gameObject.tag == "Spell")
         {
             Spell sp = other.gameObject.GetComponent<Spell>();
+            Debug.Log("Spell detected");
             if(sp.moveright != GoRight)
             {
-                if(IsReverseType(sp.type))
+                Debug.Log("Direction ok");
+                if (IsReverseType(sp.type))
                 {
-					audio.Play();
+                    Debug.Log("ChangeDirection");
+                    audio.Play();
                     ManageBallMovement();
                     SetType();
                 }
             }
-            Debug.Log("Hit !");
             sp.AnimateHit();
         }
         if(other.gameObject.tag == "Player")
