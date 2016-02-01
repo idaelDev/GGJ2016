@@ -10,24 +10,35 @@ public class KeySequencer : MonoBehaviour {
 
     public delegate void SequenceValid();
     public event SequenceValid SequenceValidEvent;
+    public bool iskonami;
 
     void Update()
     {
-        if(Input.GetKeyDown(sequence[waitedKeyIndex]))
+        if (Ball.gameBegin || iskonami)
         {
-            if(waitedKeyIndex == sequence.Length-1)
+            if (Input.GetKeyDown(sequence[waitedKeyIndex]))
             {
-                SequenceValidEvent();
-                waitedKeyIndex = 0;
+                if (waitedKeyIndex == sequence.Length - 1)
+                {
+                    SequenceValidEvent();
+                    waitedKeyIndex = 0;
+                }
+                else
+                {
+                    waitedKeyIndex++;
+                }
             }
-            else
+            else 
             {
-                waitedKeyIndex++;
+                for (int i = 0; i < sequence.Length; i++)
+                {
+                    if (Input.GetKeyDown(sequence[i]))
+                    {
+                        waitedKeyIndex = 0;
+                    }
+                }
+  
             }
-        }
-        else if(Input.anyKeyDown)
-        {
-            waitedKeyIndex = 0;
         }
     }
 }

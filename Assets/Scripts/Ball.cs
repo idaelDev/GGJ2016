@@ -24,16 +24,25 @@ public class Ball : MonoBehaviour {
 	private bool endOnce = false;
 	public float speedFadeOutVolume;
 	private AudioSource beginAudioClip;
-	public  BubbleManagerScript bubbleManager;
+
+    public  delegate void Winner(PlayerPosition player);
+    public static event Winner winEvent;
 
     bool isKonamiMode = false;
+    public KeySequencer konamiSequence;
+    public Sprite KojimaHead;
+    public SpriteRenderer ballSprite;
+    public static bool gameBegin = false;
+
 
 	//sound
+
 
 	public AudioSource audio;
 
     void Start()
     {
+        konamiSequence.SequenceValidEvent += Konami;
         anim = GetComponent<Animator>();
         speed = initialSpeed;
         distanceBetweenPlayers = Vector3.Distance(rightPlayerTransform.position, leftplayerTransform.position);
@@ -41,52 +50,71 @@ public class Ball : MonoBehaviour {
 		beginAudioClip = GetComponent<AudioSource> ();
     }
 
+    void Konami()
+    {
+        isKonamiMode = true;
+        ballSprite.sprite = KojimaHead;
+        ballSprite.color = Color.white;
+    }
+
     void Update()
     {
-		if (!beginBool) {
-			Vector3 move = moveDirection * speed * Time.deltaTime;
-			if (!goRight) {
-				move *= -1;
-			}
-			transform.position = transform.position + move;
-            if (isKonamiMode)
+        if (gameBegin)
+        {
+            if (!beginBool)
             {
-                transform.Rotate(new Vector3(0, 0, 100) * speed * Time.deltaTime * ((goRight) ? -1 : 1));
+                Vector3 move = moveDirection * speed * Time.deltaTime;
+                if (!goRight)
+                {
+                    move *= -1;
+                }
+                transform.position = transform.position + move;
+                if (isKonamiMode)
+                {
+                    transform.Rotate(new Vector3(0, 0, 100) * speed * Time.deltaTime * ((goRight) ? -1 : 1));
+                }
+                switch (element)
+                {
+                    case ElementsNames.LIGHT:
+                        anim.SetInteger("Num", 0);
+                        break;
+                    case ElementsNames.DARK:
+                        anim.SetInteger("Num", 1);
+                        break;
+                    case ElementsNames.CHAOS:
+                        anim.SetInteger("Num", 2);
+                        break;
+                    default:
+                        break;
+                }
+                Debug.Log(element.ToString());
             }
-            switch (element)
+            else
             {
-                case ElementsNames.LIGHT:
-                    anim.SetInteger("Num", 0);
-                    break;
-                case ElementsNames.DARK:
-                    anim.SetInteger("Num", 1);
-                    break;
-                case ElementsNames.CHAOS:
-                    anim.SetInteger("Num", 2);
-                    break;
-                default:
-                    break;
+                timer += Time.deltaTime;
+                if (timer >= timeToBegin)
+                {
+                    if (!endOnce)
+                    {
+                        transform.position = new Vector3(transform.position.x, -2, transform.position.z);
+                        SetType();
+                        endOnce = true;
+                    }
+                    else
+                    {
+                        beginAudioClip.volume -= Time.deltaTime * speedFadeOutVolume;
+                        if (beginAudioClip.volume == 0)
+                        {
+                            beginBool = false;
+                        }
+                    }
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, Mathf.Lerp(beginY, -2, timer / timeToBegin), transform.position.z);
+                }
             }
-            Debug.Log(element.ToString());
-		} else {
-			timer += Time.deltaTime;
-			if(timer >= timeToBegin){
-				if(!endOnce){
-					transform.position = new Vector3(transform.position.x, -2, transform.position.z);
-                    SetType();
-					endOnce = true;
-				}
-				else{
-					beginAudioClip.volume -= Time.deltaTime * speedFadeOutVolume;
-					if(beginAudioClip.volume == 0){ 
-						beginBool = false;
-					}
-				}
-			}
-			else{
-				transform.position = new Vector3(transform.position.x, Mathf.Lerp(beginY, -2, timer/timeToBegin), transform.position.z);
-			}
-		}
+        }
     }
 
     public bool GoRight
@@ -192,12 +220,7 @@ public class Ball : MonoBehaviour {
         if(other.gameObject.tag == "Player")
         {
             Debug.Log("Player " + currentPlayerTarget.ToString() + " Win !");
-			if(currentPlayerTarget == PlayerPosition.LEFT){
-				bubbleManager.setWinPlayer(1);
-			}
-			else{
-				bubbleManager.setWinPlayer(2);
-			}
+            winEvent(currentPlayerTarget);
 			/// do stuff
             Destroy(gameObject);
         }
